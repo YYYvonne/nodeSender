@@ -1,0 +1,44 @@
+{
+  "data1": {
+    "protocol": "dkconf1.0",
+    "uri": "/find_ack",
+    "pktid": 1,
+    "mac": "00d0f8880001",
+    "msg": "the led blinks for 3 seconds"
+  },
+  "error1": {
+    "protocol": "dkconf1.0",
+    "uri": "/find_nak",
+    "pktid": 1,
+    "mac": "00d0f8880001",
+    "msg": "unsupported"
+  },
+  "data2": {
+    "protocol": "dkconf1.0",
+    "uri": "/find_ack",
+    "pktid": 1,
+    "mac": "00d0f7770001",
+    "msg": "the led blinks for 3 seconds"
+  },
+  "error2": {
+    "protocol": "dkconf1.0",
+    "uri": "/find_nak",
+    "pktid": 1,
+    "mac": "00d0f7770001",
+    "msg": "unsupported"
+  },
+  "data3": {
+    "protocol": "dkconf1.0",
+    "uri": "/find_ack",
+    "pktid": 1,
+    "mac": "00d0f6660001",
+    "msg": "the led blinks for 3 seconds"
+  },
+  "error3": {
+    "protocol": "dkconf1.0",
+    "uri": "/find_nak",
+    "pktid": 1,
+    "mac": "00d0f6660001",
+    "msg": "unsupported"
+  }
+}
