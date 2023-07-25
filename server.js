@@ -3,7 +3,7 @@ let bufList = [];
 
 const fs = require('fs');
 const findData = JSON.parse(fs.readFileSync('./findData.json', 'utf8'));
-const locateData = fs.readFileSync('./locateData.json', 'utf8');
+const locateData = JSON.parse(fs.readFileSync('./locateData.json', 'utf8'));
 
 //receive msg
 const socket = dgram.createSocket('udp4');
