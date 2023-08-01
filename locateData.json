@@ -31,14 +31,14 @@
     "protocol": "dkconf1.0",
     "uri": "/find_ack",
     "pktid": 1,
-    "mac": "00d0f6660001",
+    "mac": "00d0f9990001",
     "msg": "the led blinks for 3 seconds"
   },
   "error3": {
     "protocol": "dkconf1.0",
     "uri": "/find_nak",
     "pktid": 1,
-    "mac": "00d0f6660001",
+    "mac": "00d0f9990001",
     "msg": "unsupported"
   }
 }

@@ -1,0 +1,44 @@
+{
+  "data1": {
+    "protocol": "dkconf1.0",
+    "uri": "/auth_ack",
+    "pktid": 1,
+    "mac": "00d0f8880001",
+    "token": "fakeToken1"
+  },
+  "data2": {
+    "protocol": "dkconf1.0",
+    "uri": "/auth_ack",
+    "pktid": 1,
+    "mac": "00d0f7770001",
+    "token": "fakeToken2"
+  },
+  "data3": {
+    "protocol": "dkconf1.0",
+    "uri": "/auth_ack",
+    "pktid": 1,
+    "mac": "00d0f9990001",
+    "token": "fakeToken3"
+  },
+  "error1": {
+    "protocol": "dkconf1.0",
+    "uri": "/auth_nak",
+    "pktid": 1,
+    "mac": "00d0f8000001",
+    "msg": "invalid user"
+  },
+  "error2": {
+    "protocol": "dkconf1.0",
+    "uri": "/auth_nak",
+    "pktid": 1,
+    "mac": "00d0f9990001",
+    "msg": "invalid user"
+  },
+  "error3": {
+    "protocol": "dkconf1.0",
+    "uri": "/auth_nak",
+    "pktid": 1,
+    "mac": "00d0f7770001",
+    "msg": "invalid user"
+  }
+}

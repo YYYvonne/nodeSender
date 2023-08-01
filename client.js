@@ -1,4 +1,3 @@
-const { json } = require('body-parser');
 const udp = require('dgram');
 const client = udp.createSocket('udp4');
 
@@ -14,3 +13,13 @@ client.on('message', (msg) => {
   console.log(copy);
   if (msg.toString() !== copy) client.send(Buffer.from(char), 32000);
 });
+
+const { effect, reactive } = require('@Vue/reactivity');
+
+const obj = reactive({ num: 1 });
+effect(() => {
+  console.log(obj.num);
+});
+setInterval(() => {
+  ++obj.num;
+}, 1000);
