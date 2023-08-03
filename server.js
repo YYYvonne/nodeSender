@@ -1,6 +1,7 @@
 const dgram = require('dgram');
-let bufList = [];
 
+//这是读取数据时需要的解析
+let bufList = [];
 const fs = require('fs');
 const findData = JSON.parse(fs.readFileSync('./findData.json', 'utf8'));
 const locateData = JSON.parse(fs.readFileSync('./locateData.json', 'utf8'));
@@ -11,14 +12,37 @@ const socket = dgram.createSocket('udp4');
 const MULTICAST_ADDR = '239.255.255.250';
 const PORT = 32000;
 
+//这是解密的函数
+const CryptoJS = require('crypto-js');
+const key = CryptoJS.enc.Utf8.parse('1234567890000000');
+const iv = CryptoJS.enc.Utf8.parse('1234567890000000');
+function decrypt(word) {
+  const encryptedHexStr = CryptoJS.enc.Hex.parse(word);
+  const data = CryptoJS.enc.Base64.stringify(encryptedHexStr);
+  const decrypt = CryptoJS.AES.decrypt(data, key, {
+    iv: iv,
+    mode: CryptoJS.mode.CBC,
+    padding: CryptoJS.pad.Pkcs7,
+  });
+  const decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
+  return decryptedStr.toString();
+}
+
 // Join multicast group
 socket.on('message', function (msg, rinfo) {
-  console.log('server接收到消息', msg.toString());
-  const getMsg = JSON.parse(msg.toString());
-  console.log(getMsg);
+  let getMsg = null;
+  try {
+    getMsg = JSON.parse(msg.toString());
+  } catch (err) {
+    if (err) {
+      const data = decrypt(msg.toString());
+      getMsg = JSON.parse(data);
+    }
+  }
+  console.log('server接收到消息', getMsg);
 
-  //这是发现数据的处理
   if (getMsg.uri === '/query') {
+    //这是发现数据的处理
     const buf3 = Buffer.from(JSON.stringify(findData.data3));
     const buf2 = Buffer.from(JSON.stringify(findData.data2));
     const buf1 = Buffer.from(JSON.stringify(findData.data1));
@@ -50,30 +74,23 @@ socket.on('message', function (msg, rinfo) {
   }
 
   //这是授权数据的处理
-
   if (getMsg.uri === '/auth') {
     let _name = getMsg.targets[0].username;
     let _pwd = getMsg.targets[0].encrypted_pwd;
-    if (_name != 'admin' || _pwd != 'admin') {
+    for (let i in authData) {
       //when the data is error
-      for (let i in authData) {
-        if (authData.targets[0].mac === authData[i].mac) {
-          if (authData[i].uri === '/auth_nck') {
+      if (getMsg.targets[0].mac === authData[i].mac) {
+        if (_name !== 'admin' || _pwd !== 'admin') {
+          if (authData[i].uri === '/auth_nak') {
             const buf = Buffer.from(JSON.stringify(authData[i]));
             socket.send(buf, 0, buf.length, rinfo.port, rinfo.address);
           }
-        }
-      }
-    }
-  }
-
-  //when the data is successful
-  if (getMsg.uri === '/auth') {
-    for (let i in authData) {
-      if (authData.targets[0].mac === authData[i].mac) {
-        if (authData[i].uri === '/auth_ack') {
-          const buf = Buffer.from(JSON.stringify(authData[i]));
-          socket.send(buf, 0, buf.length, rinfo.port, rinfo.address);
+        } else {
+          //when the data is successful
+          if (authData[i].uri === '/auth_ack') {
+            const buf = Buffer.from(JSON.stringify(authData[i]));
+            socket.send(buf, 0, buf.length, rinfo.port, rinfo.address);
+          }
         }
       }
     }
