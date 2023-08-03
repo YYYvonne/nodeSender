@@ -13,20 +13,7 @@ const MULTICAST_ADDR = '239.255.255.250';
 const PORT = 32000;
 
 //这是解密的函数
-const CryptoJS = require('crypto-js');
-const key = CryptoJS.enc.Utf8.parse('1234567890000000');
-const iv = CryptoJS.enc.Utf8.parse('1234567890000000');
-function decrypt(word) {
-  const encryptedHexStr = CryptoJS.enc.Hex.parse(word);
-  const data = CryptoJS.enc.Base64.stringify(encryptedHexStr);
-  const decrypt = CryptoJS.AES.decrypt(data, key, {
-    iv: iv,
-    mode: CryptoJS.mode.CBC,
-    padding: CryptoJS.pad.Pkcs7,
-  });
-  const decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
-  return decryptedStr.toString();
-}
+const decrypt = require('./decrypt');
 
 // Join multicast group
 socket.on('message', function (msg, rinfo) {
@@ -35,7 +22,7 @@ socket.on('message', function (msg, rinfo) {
     getMsg = JSON.parse(msg.toString());
   } catch (err) {
     if (err) {
-      const data = decrypt(msg.toString());
+      const data = decrypt.decrypt(msg.toString());
       getMsg = JSON.parse(data);
     }
   }
