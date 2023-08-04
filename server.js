@@ -64,23 +64,23 @@ socket.on('message', function (msg, rinfo) {
   if (getMsg.uri === '/auth') {
     let _name = getMsg.targets[0].username;
     let _pwd = getMsg.targets[0].encrypted_pwd;
-    for (let i in authData) {
+    Object.values(authData).forEach((i) => {
+      let buf = Buffer.from(JSON.stringify(i));
       //when the data is error
-      if (getMsg.targets[0].mac === authData[i].mac) {
-        if (_name !== 'admin' || _pwd !== 'admin') {
-          if (authData[i].uri === '/auth_nak') {
-            const buf = Buffer.from(JSON.stringify(authData[i]));
-            socket.send(buf, 0, buf.length, rinfo.port, rinfo.address);
-          }
-        } else {
-          //when the data is successful
-          if (authData[i].uri === '/auth_ack') {
-            const buf = Buffer.from(JSON.stringify(authData[i]));
-            socket.send(buf, 0, buf.length, rinfo.port, rinfo.address);
-          }
-        }
+      if (getMsg.targets[0].mac === i.mac) {
+        if (_name !== 'admin' || _pwd !== 'admin')
+          i.uri === '/auth_nak'
+            ? socket.send(buf, 0, buf.length, rinfo.port, rinfo.address)
+            : '';
+        //when the data is successful
+        if (_name === 'admin' && _pwd === 'admin')
+          i.uri === '/auth_ack'
+            ? socket.send(buf, 0, buf.length, rinfo.port, rinfo.address)
+            : '';
       }
-    }
+    });
+    // for (let i in authData) {
+    // }
   }
 });
 

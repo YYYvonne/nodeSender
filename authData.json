@@ -24,7 +24,7 @@
     "protocol": "dkconf1.0",
     "uri": "/auth_nak",
     "pktid": 1,
-    "mac": "00d0f8000001",
+    "mac": "00d0f8880001",
     "msg": "invalid user"
   },
   "error2": {
