@@ -7,8 +7,8 @@
     "mgmtip": {
       "vid": 1,
       "ip": "2.2.2.95",
-      "prefix": 24,
-      "gateway": "2.2.2.1"
+      "prefix": "1",
+      "gateway": "1.1.10.1"
     },
     "mac": "00d0f8880001",
     "productId": "abc",
@@ -21,7 +21,12 @@
     "uri": "/query_ack",
     "pktid": 1,
     "status": 200,
-    "mgmtip": { "vid": 1, "ip": "3.3.3.95", "prefix": 8, "gateway": "2.2.2.1" },
+    "mgmtip": {
+      "vid": 1,
+      "ip": "2.2.2.92",
+      "prefix": "1",
+      "gateway": "1.1.1.1"
+    },
     "mac": "00d0f9990001",
     "productId": "def",
     "sw_ver": "release/1.0.0",
@@ -35,14 +40,31 @@
     "status": 200,
     "mgmtip": {
       "vid": 1,
-      "ip": "4.4.4.95",
-      "prefix": 16,
-      "gateway": "2.2.2.1"
+      "gateway": "2.2.2.0",
+      "ip": "2.2.2.1",
+      "prefix": "22"
     },
     "mac": "00d0f7770001",
     "productId": "ghi",
     "sw_ver": "release/1.0.0",
     "hw_ver": "v1.00",
     "uptime": 500
+  },
+  "data4": {
+    "protocol": "dkconf1.0",
+    "uri": "/query_ack",
+    "pktid": 1,
+    "status": 200,
+    "mgmtip": {
+      "vid": 1,
+      "gateway": "1.1.1.0",
+      "ip": "1.1.1.1",
+      "prefix": "1"
+    },
+    "mac": "00d0f1110001",
+    "productId": "def",
+    "sw_ver": "release/1.0.0",
+    "hw_ver": "v1.00",
+    "uptime": 500000
   }
 }

@@ -20,6 +20,13 @@
     "mac": "00d0f9990001",
     "token": "fakeToken3"
   },
+  "data4": {
+    "protocol": "dkconf1.0",
+    "uri": "/auth_ack",
+    "pktid": 1,
+    "mac": "00d0f1110001",
+    "token": "fakeToken4"
+  },
   "error1": {
     "protocol": "dkconf1.0",
     "uri": "/auth_nak",
@@ -39,6 +46,13 @@
     "uri": "/auth_nak",
     "pktid": 1,
     "mac": "00d0f7770001",
+    "msg": "invalid user"
+  },
+  "error4": {
+    "protocol": "dkconf1.0",
+    "uri": "/auth_nak",
+    "pktid": 1,
+    "mac": "00d0f1110001",
     "msg": "invalid user"
   }
 }
