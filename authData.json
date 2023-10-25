@@ -10,21 +10,28 @@
     "protocol": "dkconf1.0",
     "uri": "/auth_ack",
     "pktid": 1,
-    "mac": "00d0f7770001",
+    "mac": "00-0E-C6-C1-38-8E",
     "token": "fakeToken2"
   },
   "data3": {
     "protocol": "dkconf1.0",
     "uri": "/auth_ack",
     "pktid": 1,
-    "mac": "00d0f9990001",
+    "mac": "78-D0-44-66-32-08",
     "token": "fakeToken3"
   },
   "data4": {
     "protocol": "dkconf1.0",
     "uri": "/auth_ack",
     "pktid": 1,
-    "mac": "00d0f1110001",
+    "mac": "78-D0-44-55-32-07",
+    "token": "fakeToken4"
+  },
+  "data5": {
+    "protocol": "dkconf1.0",
+    "uri": "/auth_ack",
+    "pktid": 1,
+    "mac": "66666",
     "token": "fakeToken4"
   },
   "error1": {
@@ -32,27 +39,27 @@
     "uri": "/auth_nak",
     "pktid": 1,
     "mac": "00d0f8880001",
-    "msg": "invalid user"
+    "msg": "invalid  user"
   },
   "error2": {
     "protocol": "dkconf1.0",
     "uri": "/auth_nak",
     "pktid": 1,
-    "mac": "00d0f9990001",
+    "mac": "00-0E-C6-C1-38-8E",
     "msg": "invalid user"
   },
   "error3": {
     "protocol": "dkconf1.0",
     "uri": "/auth_nak",
     "pktid": 1,
-    "mac": "00d0f7770001",
+    "mac": "78-D0-44-66-32-08",
     "msg": "invalid user"
   },
   "error4": {
     "protocol": "dkconf1.0",
     "uri": "/auth_nak",
     "pktid": 1,
-    "mac": "00d0f1110001",
+    "mac": "78-D0-44-55-32-07",
     "msg": "invalid user"
   }
 }

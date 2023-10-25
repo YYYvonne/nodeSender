@@ -1,0 +1,44 @@
+{
+  "data1": {
+    "protocol": "dkconf1.0",
+    "uri": "/config_ack",
+    "pktid": 1,
+    "mac": "00d0f8880001"
+  },
+  "data2": {
+    "protocol": "dkconf1.0",
+    "uri": "/config_ack",
+    "pktid": 1,
+    "mac": "00d0f9990001"
+  },
+  "data3": {
+    "protocol": "dkconf1.0",
+    "uri": "/config_ack",
+    "pktid": 1,
+    "mac": "00d0f7770001"
+  },
+  "err1": {
+    "protocol": "dkconf1.0",
+    "uri": "/config_nak",
+    "pktid": 1,
+    "mac": "00d0f8880001",
+    "status": 401,
+    "msg": "invalid token"
+  },
+  "err2": {
+    "protocol": "dkconf1.0",
+    "uri": "/config_nak",
+    "pktid": 1,
+    "mac": "00d0f7770001",
+    "status": 401,
+    "msg": "invalid token"
+  },
+  "err3": {
+    "protocol": "dkconf1.0",
+    "uri": "/config_nak",
+    "pktid": 1,
+    "mac": "00d0f9990001",
+    "status": 401,
+    "msg": "invalid token"
+  }
+}

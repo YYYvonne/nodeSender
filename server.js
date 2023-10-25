@@ -9,8 +9,6 @@ const webData = JSON.parse(fs.readFileSync('./webData.json'));
 
 //receive msg
 const socket = dgram.createSocket('udp4');
-let ip = '192.168.1.113';
-const PORT = 32000;
 let pwdArr = [];
 
 //这是解密的函数
@@ -28,8 +26,7 @@ socket.on('message', function (msg, rinfo) {
       getMsg = JSON.parse(data);
     }
   }
-
-  console.log('这是得到的请求数据', getMsg);
+  console.log('这是获取到的数据信息', getMsg);
 
   if (getMsg.uri === '/query') {
     //这是发现数据的处理
@@ -94,7 +91,7 @@ socket.on('message', function (msg, rinfo) {
   if (getMsg.uri === '/config/web') {
     let data = {};
     Object.values(webData).map((item) => {
-      if (getMsg.targets[0].token && getMsg.targets[0].token !== 'null') {
+      if (getMsg.targets[0].token) {
         if (getMsg.targets[0].mac === item.mac && item.uri === '/config_ack')
           data = item;
       } else {
@@ -102,14 +99,13 @@ socket.on('message', function (msg, rinfo) {
           data = item;
       }
     });
-
     const buf = Buffer.from(JSON.stringify(data));
     socket.send(buf, 0, buf.length, rinfo.port, rinfo.address);
   }
 
   //这是配置操作
   if (getMsg.uri === '/config/mgmtip') {
-    if (getMsg.targets[0].token && getMsg.targets[0].token !== 'null') {
+    if (getMsg.targets[0].token) {
       Object.values(findData).map((i) => {
         if (i.mac === getMsg.targets[0].mac) {
           i.mgmtip.ip = getMsg.targets[0].mgmtip.ip;
@@ -134,9 +130,15 @@ socket.on('message', function (msg, rinfo) {
   }
 });
 
-socket.on('error', (error) => {
-  console.log(error);
-  socket.close();
+socket.on('listening', function () {
+  // socket.setBroadcast(true);
+  // socket.setMulticastTTL(128);
+  socket.addMembership('239.255.255.250');
 });
 
-socket.bind(PORT, ip);
+socket.on('error', (error) => {
+  console.log(error);
+  // socket.close();
+});
+
+socket.bind(32000);
