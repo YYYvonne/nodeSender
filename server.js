@@ -10,6 +10,8 @@ const webData = JSON.parse(fs.readFileSync('./webData.json'));
 
 //receive msg
 const socket = dgram.createSocket('udp4');
+let IP = '239.255.255.250';
+const PORT = 32000;
 let pwdArr = [];
 
 //这是解密的函数
@@ -111,6 +113,7 @@ socket.on('message', function (msg, rinfo) {
     let data = {};
     Object.values(webData).map((item) => {
       if (getMsg.targets[0].token) {
+      if (getMsg.targets[0].token) {
         if (getMsg.targets[0].mac === item.mac && item.uri === '/config_ack')
           data = item;
       } else {
@@ -124,6 +127,8 @@ socket.on('message', function (msg, rinfo) {
 
   //这是配置操作
   if (getMsg.uri === '/config/ip') {
+    if (getMsg.targets[0].token) {
+  if (getMsg.uri === '/config/mgmtip') {
     if (getMsg.targets[0].token) {
       Object.values(findData).map((i) => {
         if (i.mac === getMsg.targets[0].mac) {
@@ -150,10 +155,22 @@ socket.on('message', function (msg, rinfo) {
 });
 
 socket.on('listening', function () {
+  socket.setBroadcast(true);
+  socket.setMulticastTTL(128);
+  socket.addMembership(IP);
+});
+
+socket.on('listening', function () {
+  socket.setBroadcast(true);
+  socket.setMulticastTTL(128);
+  socket.addMembership(IP);
+});
+
+socket.on('listening', function () {
   console.log('client listening...');
   // socket.setBroadcast(true);
   // socket.setMulticastTTL(128);
   // socket.addMembership('239.255.255.250');
 });
 
-socket.bind(32000);
+socket.bind(PORT, ip);
