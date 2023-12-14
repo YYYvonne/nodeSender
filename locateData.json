@@ -25,7 +25,7 @@
     "protocol": "dkconf1.0",
     "uri": "/find_ack",
     "pktid": 1,
-    "mac": "78-D0-44-55-32-07",
+    "mac": "1111111",
     "msg": "the led blinks for 3 seconds"
   },
   "data5": {
@@ -39,21 +39,21 @@
     "protocol": "dkconf1.0",
     "uri": "/find_nak",
     "pktid": 1,
-    "mac": "78-D0-44-55-32-07",
+    "mac": "1111111",
     "msg": "unsupported"
   },
   "data3": {
     "protocol": "dkconf1.0",
     "uri": "/find_ack",
     "pktid": 1,
-    "mac": "00-0E-C6-C1-38-8E",
+    "mac": "99999",
     "msg": "the led blinks for 3 seconds"
   },
   "error3": {
     "protocol": "dkconf1.0",
     "uri": "/find_nak",
     "pktid": 1,
-    "mac": "00-0E-C6-C1-38-8E",
+    "mac": "99999",
     "msg": "unsupported"
   }
 }

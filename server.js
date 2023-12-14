@@ -1,4 +1,5 @@
 const dgram = require('dgram');
+
 //这是读取数据时需要的解析
 const fs = require('fs');
 const findData = JSON.parse(fs.readFileSync('./findData.json', 'utf8'));
@@ -30,14 +31,32 @@ socket.on('message', function (msg, rinfo) {
 
   if (getMsg.uri === '/query') {
     //这是发现数据的处理
+    // const data = findData['data1'];
+    // // setInterval(() => {
+    // const buf = Buffer.from(JSON.stringify(data));
+    // socket.send(buf, 0, buf.length, rinfo.port, rinfo.address);
+    // }, 1000);
+    // let data = [];
     for (let i in findData) {
       const buf = Buffer.from(JSON.stringify(findData[i]));
+      // data.push(buf);
       socket.send(buf, 0, buf.length, rinfo.port, rinfo.address);
     }
+    // let i = 0;
+    // const timer = setInterval(() => {
+    //   if (data[i])
+    //     socket.send(data[i], 0, data[i].length, rinfo.port, rinfo.address);
+    //   ++i;
+    //   if (!data[i]) clearInterval(timer);
+    // }, 3000);
   }
 
   // 这是定位的数据发送与处理
   if (getMsg.uri === '/find') {
+    // const data = locateData['data1'];
+    // setInterval(() => {
+    // const buf = Buffer.from(JSON.stringify(data));
+    // socket.send(buf, 0, buf.length, rinfo.port, rinfo.address);
     for (let i in locateData) {
       if (getMsg.targets[0].mac === locateData[i].mac) {
         // response in success
@@ -104,13 +123,13 @@ socket.on('message', function (msg, rinfo) {
   }
 
   //这是配置操作
-  if (getMsg.uri === '/config/mgmtip') {
+  if (getMsg.uri === '/config/ip') {
     if (getMsg.targets[0].token) {
       Object.values(findData).map((i) => {
         if (i.mac === getMsg.targets[0].mac) {
-          i.mgmtip.ip = getMsg.targets[0].mgmtip.ip;
-          i.mgmtip.prefix = getMsg.targets[0].mgmtip.prefix;
-          i.mgmtip.gateway = getMsg.targets[0].mgmtip.gateway;
+          i.ip[0].ip = getMsg.targets[0].ip[0].ip;
+          i.ip[0].prefix = getMsg.targets[0].ip[0].prefix;
+          i.route[0].nexthop = getMsg.targets[0].route[0].nexthop;
         }
       });
       Object.values(netData).map((i) => {
@@ -131,14 +150,10 @@ socket.on('message', function (msg, rinfo) {
 });
 
 socket.on('listening', function () {
+  console.log('client listening...');
   // socket.setBroadcast(true);
   // socket.setMulticastTTL(128);
-  socket.addMembership('239.255.255.250');
-});
-
-socket.on('error', (error) => {
-  console.log(error);
-  // socket.close();
+  // socket.addMembership('239.255.255.250');
 });
 
 socket.bind(32000);

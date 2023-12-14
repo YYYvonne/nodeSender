@@ -9,7 +9,7 @@
     "protocol": "dkconf1.0",
     "uri": "/config_ack",
     "pktid": 1,
-    "mac": "78-D0-44-55-32-07"
+    "mac": "1111111"
   },
   "data3": {
     "protocol": "dkconf1.0",
@@ -21,7 +21,7 @@
     "protocol": "dkconf1.0",
     "uri": "/config_ack",
     "pktid": 1,
-    "mac": "00-0E-C6-C1-38-8E"
+    "mac": "99999"
   },
   "data5": {
     "protocol": "dkconf1.0",
@@ -41,7 +41,7 @@
     "protocol": "dkconf1.0",
     "uri": "/config_nak",
     "pktid": 1,
-    "mac": "78-D0-44-55-32-07",
+    "mac": "1111111",
     "status": 401,
     "msg": "invalid token"
   },
@@ -57,7 +57,7 @@
     "protocol": "dkconf1.0",
     "uri": "/config_nak",
     "pktid": 1,
-    "mac": "00-0E-C6-C1-38-8E",
+    "mac": "99999",
     "status": 401,
     "msg": "invalid token"
   }
